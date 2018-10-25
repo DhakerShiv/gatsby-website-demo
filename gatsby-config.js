@@ -19,9 +19,9 @@ module.exports = {
     {
       resolve: 'gatsby-source-contentstack',
       options:{
-        'api_key':'your_api_key',
-        'access_token':'your_access_token',
-        'environment':'your_development'
+        'api_key':'blt3648fb0677fb8898',
+        'access_token':'bltec2e59f403e52d64a94fd8d9',
+        'environment':'development'
       },
     },
     'gatsby-plugin-offline',
