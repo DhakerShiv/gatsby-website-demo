@@ -1,72 +1,80 @@
-// import React from 'react'
+import React,{Component} from 'react'
 
-// export default class Header extends React.Component {
-//   render(){
-//     return(
-//       //if (not ribbon.ribbon_info_section.is_enable_on_only_home_page_) and (ribbon.is_ribbon_disabled)
-//         // info-ribbbon section
-//         <div className = "ribbon-wrap text-center">
-//           <div className = "container">
-//             {data.ribbon.ribbon_info_section.content}
-//             <a className = "cta" title = {ribbon.ribbon_info_section.cta.title} href="{data.ribbon.ribbon_info_section.cta.link}" id="ribbon-info" type="button">{data.ribbon.ribbon_info_section.cta.title}</a>
-//             <span className = "glyphicon glyphicon-remove icon-cancel" id = "hide"></span> 
-//           </div>
-//         </div>
-//     )
-//   }
-// }
+class Header extends Component {
+  
+	render(){
+    const ribbon = this.props.ribbon
+    const header = this.props.header
+			return(
+				<div>
+          
+          {console.log(ribbon)}
+          {console.log(header)}
+					{(!(ribbon.ribbon_info_section.is_enable_on_only_home_page_) && ribbon.is_ribbon_disabled)?
+						<div className="ribbon-wrap text-center">
+									<div className="container">
+											{ribbon.ribbon_info_section.content}
+											<a className="cta" title={ribbon.ribbon_info_section.cta.title}  target={(ribbon.ribbon_info_section.cta.open_in_new_tab)&&"_blank"} href="{ribbon.ribbon_info_section.cta.link}" id="ribbon-info" type="button">{ribbon.ribbon_info_section.cta.title}</a>
+											<span className="glyphicon glyphicon-remove icon-cancel" id="hide"></span> 
+									</div>
+						</div>: null}
+						{
+              //(window.location.pathname==='/')?
+              (true)?
+							<header>
+								<nav className={(ribbon.ribbon_info_section.is_enable_on_only_home_page_ || ribbon.is_ribbon_disabled)&&"custom-margin"} id="navbar">
+											<div className="container">
+													<div className="navbar-header">
+															<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+																	<span className="sr-only">Toggle navigation</span>
+																	<span className="icon-bar"></span>
+																	<span className="icon-bar"></span>
+																	<span className="icon-bar"></span>
+															</button>
+                              {console.log(header.logo_section.logo.url)}
+															<a className="navbar-brand" href="#"><img src={header.logo_section.logo.url} alt="" width="100"/></a>
+													</div>
+													<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+															<ul className="nav navbar-nav navbar-right">
+																	{
+																	header.nav_section.nav_menu.map((menu) => {
+																		return <li key = {menu.link}><a className={(menu.title === 'Contact Us')?'waypoint btn btn-primary':'waypoint'} href={menu.link}>{menu.title}</a></li>
+																	})
+																}	
+															</ul>
+													</div>
+											</div>
+									</nav>
+							</header>:
+							<header>
+							<nav className="navbar secondary-nav">
+									<div className="container">
+											<div className="navbar-header">
+													<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+															<span className="sr-only">Toggle navigation</span>
+															<span className="icon-bar"></span>
+															<span className="icon-bar"></span>
+															<span className="icon-bar"></span>
+													</button>
+													<a className="navbar-brand" href={header.logo_section.link}><img src={header.logo_section.logo.url} alt="" /></a>
+											</div>
+											<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+													<ul className="nav navbar-nav navbar-right">
+															{
+																header.nav_section.nav_menu.map((menu)=>{
+																	return <li key = {menu.link}><a className={(menu.title === 'Contact Us')?'btn btn-primary':''} href={menu.link}>{menu.title}</a></li>
+																})
+															}
+													</ul>
+											</div>
+									</div>
+							</nav>
+					</header>
+					
+						}
+				</div>
+			)
+		}
+}
 
-// {%- set ribbon = get('ribbon_content')-%}
-//     {%- if (not ribbon.ribbon_info_section.is_enable_on_only_home_page_) and (ribbon.is_ribbon_disabled) -%}
-//     <!-- info-ribbbon section -->
-//     <div class="ribbon-wrap text-center">
-//             <div class="container">
-//                 {{ribbon.ribbon_info_section.content}}
-//                 <a class="cta" title="{{ribbon.ribbon_info_section.cta.title}}" {% if ribbon.ribbon_info_section.cta.open_in_new_tab %} target="_blank" {% endif %} href="{{ribbon.ribbon_info_section.cta.link}}" id="ribbon-info" type="button">{{ribbon.ribbon_info_section.cta.title}}</a>
-//                 <span class="glyphicon glyphicon-remove icon-cancel" id="hide"></span> 
-//             </div>
-//         </div>
-//     {%- endif -%}
-// {%- if entry.url == "/"-%}
-
-
-
-//old code
-// export const pageQuery = graphql`
-//     query ab {
-//       contentstackHomePage {
-//         title
-//       }
-//     }`
-
-//old code
-// const Header = ({ siteTitle }) => (
-//   <div
-//     style={{
-//       background: 'rebeccapurple',
-//       marginBottom: '1.45rem',
-//     }}
-//   >
-//     <div
-//       style={{
-//         margin: '0 auto',
-//         maxWidth: 960,
-//         padding: '1.45rem 1.0875rem',
-//       }}
-//     >
-//       <h1 style={{ margin: 0 }}>
-//         <Link
-//           to="/"
-//           style={{
-//             color: 'white',
-//             textDecoration: 'none',
-//           }}
-//         >
-//           {siteTitle}
-//         </Link>
-//       </h1>
-//     </div>
-//   </div>
-// )
-
-// export default Header
+export default Header;
