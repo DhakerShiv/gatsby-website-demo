@@ -6,16 +6,55 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from './header'
 import Footer from './footer'
 import './layout.css'
+import '../../static/main.css'
 
 const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
       query footer {
         contentstackFooter {
-          copyright_text
+          footer_section {
+            copyrights_text
+          } 
         }
+        contentstackHeader {
+          logo_section {
+            logo {
+              url
+            }
+            link
+          }
+          nav_section {
+           nav_menu {
+             title
+             link
+           }
+          }
+        }
+        contentstackRibbonContent{
+          ribbon_info_section {
+            is_enable_on_only_home_page_
+            content
+            cta {
+              title
+              open_in_new_tab
+              link
+            }
+          }
+          is_ribbon_disabled
+        }
+
       }
     `}
+
+  //  pageQuery = {graphql`
+  //   query ab {
+  //     contentstackHeader {
+  //      title
+  //     }
+  //   }`}
+
+
     render={data => (
       <>
         <Helmet
@@ -28,7 +67,8 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        {/* <Header siteTitle = { data.site.siteMetadata.title } /> */}
+        <Header header = {data.contentstackHeader} ribbon = {data.contentstackRibbonContent} />
+        {children}
         <Footer footer = { data.contentstackFooter }/>
         <div
           style={{
@@ -38,7 +78,6 @@ const Layout = ({ children }) => (
             paddingTop: 0,
           }}
         >
-          {children}
         </div>
       </>
     )}
