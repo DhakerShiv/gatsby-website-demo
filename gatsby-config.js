@@ -21,7 +21,7 @@ module.exports = {
       options:{
         'api_key':'blt06040edec3ef3ebf',
         'access_token':'blt0b44a6a6076336d5',
-        'environment':'production'
+        'environment':'staging'
       },
     },
     'gatsby-plugin-offline',
