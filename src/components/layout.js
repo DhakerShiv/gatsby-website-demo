@@ -47,14 +47,6 @@ const Layout = ({ children }) => (
       }
     `}
 
-  //  pageQuery = {graphql`
-  //   query ab {
-  //     contentstackHeader {
-  //      title
-  //     }
-  //   }`}
-
-
     render={data => (
       <>
         <Helmet
